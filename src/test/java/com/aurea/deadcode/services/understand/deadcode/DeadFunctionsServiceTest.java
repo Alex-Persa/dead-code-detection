@@ -36,20 +36,19 @@ public class DeadFunctionsServiceTest {
 
         List<DeadCode> deadParams = deadParameterService.getDeadCode(db);
 
-        for (DeadCode deadVar : deadParams) {
-            System.out.println(deadVar.getLongName() + " " + deadVar.getKind());
-        }
+        Assert.assertEquals(7 ,deadParams.size());
+        Assert.assertEquals("somepackage.otherpackage.C2.usedMethodWithUnusedVar.unusedParamInt" ,deadParams.get(3).getLongName());
     }
 
     @Test
     public void testDeadVariables() {
         DeadVariableAnalyzerService deadVariableService = new DeadVariableAnalyzerService();
 
-        List<DeadCode> deadVaiables = deadVariableService.getDeadCode(db);
+        List<DeadCode> deadVariables = deadVariableService.getDeadCode(db);
 
-        for (DeadCode deadVar : deadVaiables) {
-            System.out.println(deadVar.getLongName() + " " + deadVar.getKind());
-        }
+        Assert.assertEquals(10 ,deadVariables.size());
+        Assert.assertEquals("Private Static Variable" ,deadVariables.get(5).getKind());
+
     }
 
     @Test
