@@ -1,0 +1,13 @@
+spring.application.name: dead-code-detector
+und.command.file.path: c:\Program Files\SciTools\bin\pc-win64\und
+logging.file: dead-code-detection.log
+logging.level.com.aurea.deadcode: DEBUG
+
+#management.security.enabled: false
+#spring.jpa.hibernate.ddl-auto: validate
+#spring.h2.console.enabled: true
+
+---
+spring:
+    profiles: dev
+und.command.file.path: ./scitools/bin/linux64/und
