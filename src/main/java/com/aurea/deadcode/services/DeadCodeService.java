@@ -30,11 +30,12 @@ public class DeadCodeService {
 
     /**
      * Saved dead code occurrences corresponding to the given repository
-     * @param deadCodeList the dead code occurrences
+     *
+     * @param deadCodeList  the dead code occurrences
      * @param gitRepository the git repository linked to the dead codes
      */
     protected void saveDeadCode(List<DeadCode> deadCodeList, GitRepository gitRepository) {
-        for(DeadCode deadCode : deadCodeList) {
+        for (DeadCode deadCode : deadCodeList) {
             deadCode.setGitRepository(gitRepository);
         }
         deadCodeRepository.save(deadCodeList);
@@ -45,21 +46,22 @@ public class DeadCodeService {
 
     /**
      * Get all dead codes analyzed from a repository
+     *
      * @param id the repository id
      * @return a list with dead code locations.
      */
     public List<DeadCodeDTO> getDeadCode(Long id) {
         GitRepository gitRepository = gitRepositoryRepository.findOne(id);
-        if(gitRepository == null) {
+        if (gitRepository == null) {
             throw new NotFoundException("A repository with id " + id + " does not exist");
         }
-        if(gitRepository.getState().equals(ProcessingState.FAILED)) {
+        if (gitRepository.getState().equals(ProcessingState.FAILED)) {
             throw new RepoAnalizeFinisedWithFailureException(gitRepository.getErrors());
         }
 
         List<DeadCodeDTO> deadCodeDTOList = new ArrayList<>();
         DeadCodeMapper mapper = new DeadCodeMapper();
-        gitRepository.getDeadCodes().forEach( entity -> deadCodeDTOList.add(mapper.mapToDTO(entity)));
+        gitRepository.getDeadCodes().forEach(entity -> deadCodeDTOList.add(mapper.mapToDTO(entity)));
 
         return deadCodeDTOList;
     }

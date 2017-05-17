@@ -25,7 +25,7 @@ public class DeadcodeController {
 
     @ApiOperation(value = "Get dead code occurrences for a given repository")
     @GetMapping(value = "/{repositoryId}")
-    public List<DeadCodeDTO> testCreateUdb(@PathVariable Long repositoryId) {
+    public List<DeadCodeDTO> getDeadCode(@PathVariable Long repositoryId) {
         return deadCodeService.getDeadCode(repositoryId);
     }
 
