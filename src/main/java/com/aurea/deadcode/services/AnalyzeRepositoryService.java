@@ -48,6 +48,7 @@ public class AnalyzeRepositoryService {
 
     /**
      * Asynchronously downloads the git repo, creates udb file, analyze it and save into db the found dead codes
+     *
      * @param gitRepository the git repository entity object on which to perform the analyze.
      */
     @Async
@@ -84,7 +85,8 @@ public class AnalyzeRepositoryService {
 
     /**
      * Update the repository states with FAILED status, timestamp and error message.
-     * @param e the exception from where to extract the error message
+     *
+     * @param e          the exception from where to extract the error message
      * @param repository the repository to which to set the failed state.
      */
     private void setErrorState(Exception e, GitRepository repository) {
